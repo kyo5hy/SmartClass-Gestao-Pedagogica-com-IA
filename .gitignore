@@ -1,0 +1,33 @@
+# Ambiente e Segredos
+.env
+.DS_Store
+
+# Dependências Node.js
+node_modules/
+npm-debug.log
+
+# Dependências e Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.pytest_cache/
+
+# Banco de Dados e Mídias (MUITO IMPORTANTE PARA A LGPD)
+data/database.db
+data/faces/*
+data/clips/*
+data/screenshots/*
+data/encodings.pickle
+
+# Exceção: Manter as pastas vazias no Git para manter a estrutura
+!data/faces/.gitkeep
+!data/clips/.gitkeep
+!data/screenshots/.gitkeep
+
+# Modelos de IA pesados (Baixados via script depois)
+*.pt
+*.onnx
+*.ncnn
+*.param
+*.bin

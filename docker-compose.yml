@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: nginx:alpine
+    container_name: smartclass_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
+  node_api:
+    build: ./node_api
+    container_name: smartclass_node
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node_api:/app/node_api
+      - ./data:/app/data
+      - ./.env:/app/.env
+
+  python_api:
+    build: ./python_ia
+    container_name: smartclass_python
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./python_ia:/app/python_ia
+      - ./data:/app/data
+      - ./.env:/app/.env
+      - ./yolov8n_ncnn_model:/app/yolov8n_ncnn_model
+      - ./yolov8n-face_ncnn_model:/app/yolov8n-face_ncnn_model
+      - ./yolov8n.pt:/app/yolov8n.pt
+      - ./yolov8n-face.pt:/app/yolov8n-face.pt
+    # Esta diretiva garante que a IA não rebenta a memória do Pi
+    deploy:
+      resources:
+        limits:
+          memory: 3G
