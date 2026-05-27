@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend:
     image: nginx:alpine
@@ -17,9 +15,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./node_api:/app/node_api
       - ./data:/app/data
-      - ./.env:/app/.env
+    env_file:
+      - .env
 
   python_api:
     build: ./python_ia
@@ -28,14 +26,15 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./python_ia:/app/python_ia
       - ./data:/app/data
-      - ./.env:/app/.env
-      - ./yolov8n_ncnn_model:/app/yolov8n_ncnn_model
-      - ./yolov8n-face_ncnn_model:/app/yolov8n-face_ncnn_model
-      - ./yolov8n.pt:/app/yolov8n.pt
-      - ./yolov8n-face.pt:/app/yolov8n-face.pt
-    # Esta diretiva garante que a IA não rebenta a memória do Pi
+      - ./yolov8n_ncnn_model:/app/python_ia/yolov8n_ncnn_model
+      - ./yolov8n-face_ncnn_model:/app/python_ia/yolov8n-face_ncnn_model
+      - ./yolov8n-pose_ncnn_model:/app/python_ia/yolov8n-pose_ncnn_model
+      - ./python_ia/yolov8n.pt:/app/python_ia/yolov8n.pt
+      - ./python_ia/yolov8n-face.pt:/app/python_ia/yolov8n-face.pt
+      - ./python_ia/yolov8n-pose.pt:/app/python_ia/yolov8n-pose.pt
+    env_file:
+      - .env
     deploy:
       resources:
         limits:
