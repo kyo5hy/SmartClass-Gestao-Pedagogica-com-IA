@@ -25,9 +25,4 @@ data/encodings.pickle
 !data/clips/.gitkeep
 !data/screenshots/.gitkeep
 
-# Modelos de IA pesados (Baixados via script depois)
-*.pt
-*.onnx
-*.ncnn
-*.param
-*.bin
+# Os modelos .pt e as pastas NCNN agora SOBEM para o GitHub para facilitar o Deploy!
