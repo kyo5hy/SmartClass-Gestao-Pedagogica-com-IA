@@ -56,7 +56,7 @@ face_engine = FaceEngine(data_path=DATA_FACES, encodings_file=DATA_ENCODINGS)
 pose_engine = PoseEngine()
 
 # Detector de Celular
-phone_detector_path = os.path.join(BASE_DIR, 'yolov8n_ncnn_model')
+phone_detector_path = os.path.join(BASE_DIR, 'python_ia', 'yolov8n_ncnn_model') # Ajuste leve de path para garantir que pegue o modelo na pasta certa
 if os.path.exists(phone_detector_path):
     phone_detector = YOLO(phone_detector_path, task="detect")
     print("✅ YOLO-Celular NCNN (Edge) carregado com sucesso!")
@@ -64,18 +64,17 @@ else:
     phone_detector = YOLO('yolov8n.pt') 
 
 # Detector de Rostos (Tratado como POSE)
-face_detector_path = os.path.join(BASE_DIR, 'yolov8n-face_ncnn_model')
+face_detector_path = os.path.join(BASE_DIR, 'python_ia', 'yolov8n-face_ncnn_model') # Ajuste leve de path
 try:
     if os.path.exists(face_detector_path):
         face_detector = YOLO(face_detector_path, task="pose") 
         print("✅ YOLO-Face NCNN (Edge) carregado com sucesso!")
     else:
-        face_detector = YOLO(os.path.join(BASE_DIR, 'yolov8n-face.pt')) 
+        face_detector = YOLO(os.path.join(BASE_DIR, 'python_ia', 'yolov8n-face.pt')) 
         print("✅ YOLO-Face PyTorch (Standard) carregado com sucesso!")
 except Exception as e:
     print(f"⚠️ Aviso ao carregar face_detector: {e}")
     face_detector = YOLO('yolov8n.pt') 
-
 
 def cleanup_old_clips():
     while True:
@@ -486,7 +485,6 @@ def ia_process_worker(shared_state, frame_queue, clip_queue, aula_dict, zonas, a
         except Exception as e:
             print(f"❌ Erro no Processo Isolado da IA: {e}")
             time.sleep(1)
-
 
 @app.get("/map_feed/{sala_id}")
 def map_feed(sala_id: int, token: str = None):

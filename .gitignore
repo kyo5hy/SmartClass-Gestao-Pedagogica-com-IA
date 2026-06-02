@@ -1,28 +1,25 @@
-# Ambiente e Segredos
-.env
-.DS_Store
-
-# Dependências Node.js
-node_modules/
+# Node.js
+node_api/node_modules/
 npm-debug.log
 
-# Dependências e Cache Python
+# Python
+.venv/
+python_ia/venv/
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-.pytest_cache/
 
-# Banco de Dados e Mídias (MUITO IMPORTANTE PARA A LGPD)
+# Banco de Dados e Dados Locais
 data/database.db
-data/faces/*
-data/clips/*
-data/screenshots/*
+data/database.db-shm
+data/database.db-wal
 data/encodings.pickle
-
-# Exceção: Manter as pastas vazias no Git para manter a estrutura
+data/faces/*
 !data/faces/.gitkeep
+data/clips/*
 !data/clips/.gitkeep
+data/screenshots/*
 !data/screenshots/.gitkeep
 
-# Os modelos .pt e as pastas NCNN agora SOBEM para o GitHub para facilitar o Deploy!
+# Variaveis de Ambiente
+.env

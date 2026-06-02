@@ -33,7 +33,6 @@ if (!SECRET_KEY) {
     process.exit(1);
 }
 
-
 const authMiddleware = async (req, res, next) => {
     try {
         const token = req.headers.authorization?.split(' ')[1];
